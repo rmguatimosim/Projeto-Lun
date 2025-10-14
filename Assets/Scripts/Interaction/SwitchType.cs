@@ -1,0 +1,1 @@
+public enum SwitchType{on, off}
