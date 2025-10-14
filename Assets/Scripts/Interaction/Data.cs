@@ -32,6 +32,7 @@ public class Data : MonoBehaviour
 
     private void OnInteraction(object sender, InteractionEventArgs args)
     {
+        if (pc.hasInteracted) return;
         if (pc.currentVarForm.varType == VarType.Null)
         {
             return;
@@ -40,14 +41,17 @@ public class Data : MonoBehaviour
         {
             Debug.Log("entrou no copy");
             pc.Copy(content, gameObject);
+            pc.hasInteracted = true;
+            return;
             
         }
         if (args.action == InteractionType.store && canReceive)
         {
             Store();
             Debug.Log("entrou no store");
+            pc.hasInteracted = true;
+            return;
         }
-
     }
 
     private void Store()
@@ -103,6 +107,7 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Tipo inválido");
+                pc.thisHealth.Damage(1);
             }
         }
         if (gameObject.GetComponent<Switch>() != null)
@@ -115,6 +120,7 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Tipo inválido para abrir a porta");
+                pc.thisHealth.Damage(1);
             }
         }
         if (gameObject.GetComponent<ObstacleScript>() != null)
@@ -127,6 +133,7 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Tipo inválido");
+                pc.thisHealth.Damage(1);
             }
         }
         if (gameObject.GetComponent<PylonScript>() != null)
@@ -139,11 +146,14 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Tipo inválido");
+                pc.thisHealth.Damage(1);
             }
         }
-        
+
         pc.UpdateUI();
     }
+    
+
 
 
 }

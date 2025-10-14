@@ -23,13 +23,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Assign assignState;
     [HideInInspector] public Hurt hurtState;
     [HideInInspector] public Dead deadState;
-    [HideInInspector]
-    public Cutscene cutsceneState
-    ;
+    [HideInInspector]public Cutscene cutsceneState;
 
     //Components
     [HideInInspector] public Rigidbody thisRigidBody;
     [HideInInspector] public Animator thisAnimator;
+    [HideInInspector] public HealthScript thisHealth;
 
 
     //player controls
@@ -77,6 +76,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool hasStoreInput;
     [HideInInspector] public int content;
     public event EventHandler<SaveContentArgs> OnCopy;
+    [HideInInspector] public bool hasInteracted;
+
+
 
     [Header("Footsteps")]
     public AudioClip footstepSounds;
@@ -85,7 +87,6 @@ public class PlayerController : MonoBehaviour
 
     //cutscene lock
     [HideInInspector] public bool isInCutscene;
-
     
 
 
@@ -98,6 +99,11 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         thisRigidBody = GetComponent<Rigidbody>();
         thisAnimator = GetComponent<Animator>();
+        thisHealth = GetComponent<HealthScript>();
+
+        //subscribe to events
+        thisHealth.OnDamage += OnDamage;
+        thisHealth.OnHeal += OnHeal;
 
         //start playerInput
         moveAction = playerInput.actions.FindAction("Move");
@@ -141,9 +147,9 @@ public class PlayerController : MonoBehaviour
         cooldownToggleForm = toggleFormTimer;
 
 
-        // //update UI
-        // var gameplayUI = GameManager.Instance.gameplayUI;
-        // gameplayUI.playerHealthBar.SetMaxHealth(thisLife.maxHealth);
+        //update UI
+        var gameplayUI = GameManager.Instance.gameplayUI;
+        gameplayUI.SetEnergyBar();
 
     }
 
@@ -156,7 +162,7 @@ public class PlayerController : MonoBehaviour
         movementVector = moveAction.ReadValue<Vector2>();
 
         //receive jump input
-        hasJumpInput = jumpAction.ReadValue<float>() == 1;
+        //hasJumpInput = jumpAction.ReadValue<float>() == 1;
 
         //has changeForm hold input
         transformAction.performed += context =>
@@ -204,15 +210,12 @@ public class PlayerController : MonoBehaviour
             {
                 hasCopyInput = true;
             }
-            else hasCopyInput = false;
-
 
             //receive store input
             if (storeAction.ReadValue<float>() == 1 && !hasJumpInput)
             {
                 hasStoreInput = true;
             }
-            else hasStoreInput = false;
         }
 
 
@@ -302,7 +305,18 @@ public class PlayerController : MonoBehaviour
 
         });
         UpdateUI();
+    }
 
+    private void OnDamage(object sender, DamageEventArgs args)
+    {
+        thisHealth.health -= args.damage;
+        gm.gameplayUI.SetEnergyBar();
+        //switch to hurt
+        stateMachine.ChangeState(hurtState);
+    }
+     private void OnHeal(object sender, HealEventArgs args)
+    {
+        
     }
 
 

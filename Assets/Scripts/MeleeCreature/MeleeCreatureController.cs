@@ -139,10 +139,11 @@ public class MeleeCreatureController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Game Over");
-            if (!GameManager.Instance.isGameOver)
-            {
-                GameManager.Instance.isGameOver = true;
-            }
+            // if (!GameManager.Instance.isGameOver)
+            // {
+            //     GameManager.Instance.isGameOver = true;
+            // }
+            GameManager.Instance.player.GetComponent<HealthScript>().Damage(4);
         }
         if (collision.gameObject.CompareTag("Fragment"))
         {

@@ -6,7 +6,7 @@ public class FaceCamera : MonoBehaviour
 
     void Awake()
     {
-        worldCamera = GameManager.Instance.worldUiCamera;
+        //worldCamera = GameManager.Instance.worldUiCamera;
     }
 
     // Update is called once per frame
@@ -14,7 +14,7 @@ public class FaceCamera : MonoBehaviour
     {
 
         //face camera
-        transform.rotation = worldCamera.transform.rotation;
+        //transform.rotation = worldCamera.transform.rotation;
         
     }
 }

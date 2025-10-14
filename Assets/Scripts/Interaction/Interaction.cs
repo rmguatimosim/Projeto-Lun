@@ -26,20 +26,6 @@ public class Interaction : MonoBehaviour
 
     void Start()
     {
-        // //set widget camera
-        // var worldUiCamera = GameManager.Instance.worldUiCamera;
-        // var canvas = widget.GetComponent<Canvas>();
-        // if (canvas != null)
-        // {
-        //     canvas.worldCamera = worldUiCamera;
-        // }
-
-        // var interactionWidgetComponent = widget.GetComponent<InteractionWidget>();
-        // if (interactionWidgetComponent != null)
-        // {
-        //     interactionWidgetComponent.worldCamera = worldUiCamera;
-        // }
-
     }
 
     // Update is called once per frame

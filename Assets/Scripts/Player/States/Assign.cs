@@ -38,6 +38,9 @@ namespace Player.States
         public override void Exit()
         {
             base.Exit();
+            controller.hasCopyInput = false;
+            controller.hasStoreInput = false;
+            controller.hasInteracted = false;
 
         }
 

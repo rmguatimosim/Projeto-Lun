@@ -18,8 +18,8 @@ namespace Player.States
         {
             base.Enter();
 
-            // //reset timer
-            // timePassed = 0;
+            //reset timer
+            timePassed = 0;
 
             // //pause damage
             // controller.thisLife.isVulnerable = false;
@@ -43,22 +43,23 @@ namespace Player.States
         {
             base.Update();
 
-            // //switch to dead
-            // if (controller.thisLife.IsDead())
-            // {
-            //     controller.stateMachine.ChangeState(controller.deadState);
-            //     return;
-            // }
+            //switch to dead
+            if (controller.thisHealth.IsDead())
+            {
+                controller.stateMachine.ChangeState(controller.deadState);
+                GameManager.Instance.isGameOver = true;
+                return;
+            }
 
-            // //update timer
-            // timePassed += Time.deltaTime;
+            //update timer
+            timePassed += Time.deltaTime;
 
-            // //switch to idle
-            // if (timePassed >= controller.hurtDuration)
-            // {
-            //     controller.stateMachine.ChangeState(controller.idleState);
-            //     return;
-            // }
+            //switch to idle
+            if (timePassed >= controller.hurtDuration)
+            {
+                controller.stateMachine.ChangeState(controller.idleState);
+                return;
+            }
         }
 
         public override void LateUpdate()

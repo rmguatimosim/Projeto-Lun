@@ -11,6 +11,9 @@ public class DoorScript : MonoBehaviour
     private bool isClosed = true;
     public VarForm varForm;
     private bool isSolved;
+    private bool colorIsNormal;
+    private Material activeDoorMaterial;
+
 
     //panel control
     public Canvas display;
@@ -26,6 +29,7 @@ public class DoorScript : MonoBehaviour
     void Awake()
     {
         doorRenderers = door.GetComponentsInChildren<MeshRenderer>();
+        activeDoorMaterial = doorRenderers[0].material;
         data = GetComponent<Data>();
         thisAnimator = GetComponent<Animator>();
     }
@@ -56,9 +60,17 @@ public class DoorScript : MonoBehaviour
                 data.canReceive = !isActive;
                 GetComponent<BoxCollider>().enabled = isActive;
                 isSolved = true;
-                puzzleDisplay.alpha = 0;    
-                
+                puzzleDisplay.alpha = 0;
+
             }
+        }
+        if (isSolved && !colorIsNormal)
+        {
+            foreach (MeshRenderer renderer in doorRenderers)
+            {
+                renderer.material = activeDoorMaterial;
+            }
+            colorIsNormal = true;
         }
     }
 

@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -10,16 +10,22 @@ public class GameplayUI : MonoBehaviour
 
     [Header("Objects")]
     private PlayerController pc;
+
+    //display form and content
     [SerializeField] private GameObject objectContainer;
     [SerializeField] private TextMeshProUGUI typeText;
     [SerializeField] private TextMeshProUGUI currentType;
     [SerializeField] private TextMeshProUGUI value;
 
-    //private List<ObjectEntry> entries = new();
+    //energy bar
+    [Header("Energia")]
+    public Image energyContainer;
+    public List<Sprite> energyIcons;
+
+
 
     void Awake()
     {
-
         pc = GameManager.Instance.player.GetComponent<PlayerController>();
 
     }
@@ -64,41 +70,10 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-
-    // public void AddObjects(ItemType type)
-    // {
-    //     if (type != ItemType.Key && type != ItemType.BossKey) return;
-
-    //     //create widget
-    //     var template = type == ItemType.Key ? keyTemplate : bossKeyTemplate;
-    //     var widget = Instantiate(template, template.transform);
-    //     widget.SetActive(true);
-    //     widget.transform.SetParent(objectContainer.transform);
-
-    //     //create entry
-    //     ObjectEntry entry = new ObjectEntry
-    //     {
-    //         type = type,
-    //         widget = widget
-    //     };
-    //     entries.Add(entry);
-    // }
-
-    // public void RemoveObject(ItemType type)
-    // {
-    //     for (int i = 0; i < entries.Count; i++)
-    //     {
-    //         var entry = entries[i];
-    //         if (entry.type == type)
-    //         {
-    //             Destroy(entry.widget);
-    //             entries.RemoveAt(i);
-    //             return;
-    //         }
-    //     }
-    // }
-
-
+    public void SetEnergyBar()
+    {
+        energyContainer.sprite = energyIcons[pc.thisHealth.health];
+    }
 
 
 }
