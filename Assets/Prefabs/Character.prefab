@@ -444,6 +444,7 @@ MonoBehaviour:
   hurtDuration: 0.2
   changeFormDuration: 1
   hasChangeFormInput: 0
+  formsIndex: 0
   forms:
   - {fileID: 11400000, guid: 09996f34f915fa84d93cd5f0b32e722b, type: 2}
   - {fileID: 11400000, guid: 355e916225c167f45b12241dbdf5d390, type: 2}
@@ -462,6 +463,7 @@ MonoBehaviour:
   hasCopyInput: 0
   hasStoreInput: 0
   content: 0
+  hasInteracted: 0
   footstepSounds: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   footstepAudioSource: {fileID: 4523428686528810591}
   footstepInterval: 0.7

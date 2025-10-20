@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -25,7 +26,8 @@ public class DataTextScript : MonoBehaviour
     {
         if (pc.hasChangeFormInput)
         {
-            SetValueText();
+            StartCoroutine(UpdateText());
+            //SetValueText();
         }
     }
 
@@ -46,5 +48,10 @@ public class DataTextScript : MonoBehaviour
             text.text = data.content.ToString();
         }
 
+    }
+    private IEnumerator UpdateText()
+    {
+        yield return new WaitForSeconds(0.6f);
+        SetValueText();
     }
 }

@@ -24,16 +24,15 @@ namespace Player.States
 
             //reset timer
             hasChanged = false;
-            cooldown = 0.9f;
+            cooldown = 0.5f;
 
-            if(controller.currentVarForm == controller.selectedVarForm)
+            //if changing to same form, reset to null
+            if(controller.currentVarForm == controller.selectedVarForm && controller.selectedVarForm.varType != VarType.Null)
             {
                 controller.selectedVarForm = controller.forms[0];
+                controller.formsIndex = 0;
+                
             }
-
-            // //change var type
-            // TypeChange();
-            // controller.currentVarForm = controller.selectedVarForm;
 
             //update animator
             controller.thisAnimator.SetBool("bChangeForm", true);
@@ -47,6 +46,7 @@ namespace Player.States
             controller.currentVarForm = controller.selectedVarForm;
             controller.content = 0;
             controller.UpdateUI();
+            gm.gameplayUI.SetTypeText();
 
             //update animator
             controller.thisAnimator.SetBool("bChangeForm", false);

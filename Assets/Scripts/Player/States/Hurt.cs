@@ -7,7 +7,7 @@ namespace Player.States
     {
         private readonly PlayerController controller;
 
-        private float timePassed;
+        //private float timePassed;
 
         public Hurt(PlayerController controller) : base("Hurt")
         {
@@ -18,15 +18,6 @@ namespace Player.States
         {
             base.Enter();
 
-            //reset timer
-            timePassed = 0;
-
-            // //pause damage
-            // controller.thisLife.isVulnerable = false;
-
-            // //update animator
-            // controller.thisAnimator.SetTrigger("tHurt");
-
             // //update UI
             // var gameplayUI = GameManager.Instance.gameplayUI;
             // gameplayUI.playerHealthBar.SetHealth(controller.thisLife.health);
@@ -35,8 +26,7 @@ namespace Player.States
         public override void Exit()
         {
             base.Exit();
-            // //resume damage
-            // controller.thisLife.isVulnerable = true;
+            
         }
 
         public override void Update()
@@ -50,16 +40,12 @@ namespace Player.States
                 GameManager.Instance.isGameOver = true;
                 return;
             }
+            //switch to change form
+            controller.selectedVarForm = controller.forms[0];
+            controller.formsIndex = 0;
+            controller.hasChangeFormInput = true;
+            controller.stateMachine.ChangeState(controller.changeFormState);           
 
-            //update timer
-            timePassed += Time.deltaTime;
-
-            //switch to idle
-            if (timePassed >= controller.hurtDuration)
-            {
-                controller.stateMachine.ChangeState(controller.idleState);
-                return;
-            }
         }
 
         public override void LateUpdate()

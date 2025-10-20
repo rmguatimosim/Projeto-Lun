@@ -12,15 +12,20 @@ public class GameplayUI : MonoBehaviour
     private PlayerController pc;
 
     //display form and content
-    [SerializeField] private GameObject objectContainer;
+    // [SerializeField] private GameObject objectContainer;
     [SerializeField] private TextMeshProUGUI typeText;
     [SerializeField] private TextMeshProUGUI currentType;
     [SerializeField] private TextMeshProUGUI value;
+    [SerializeField] private GameObject tutorial;
+    
 
     //energy bar
     [Header("Energia")]
     public Image energyContainer;
     public List<Sprite> energyIcons;
+
+    //display  location
+    [SerializeField] private TextMeshProUGUI location;
 
 
 
@@ -61,8 +66,13 @@ public class GameplayUI : MonoBehaviour
         }
         else if (pc.currentVarForm.varType == Player.VarType.Char)
         {
+            if(pc.content == 0)
+            {
+                value.text = "' '";
+                return;
+            }
             char cont = (char)pc.content;
-            value.text = cont.ToString();
+            value.text = "'" + cont.ToString() + "'";
         }
         else
         {
@@ -75,5 +85,14 @@ public class GameplayUI : MonoBehaviour
         energyContainer.sprite = energyIcons[pc.thisHealth.health];
     }
 
+    public void SetLocationText(string txt)
+    {
+        location.text = txt;
+    }
+
+    public void ToggleTutorial()
+    {
+        tutorial.SetActive(true);
+    }
 
 }

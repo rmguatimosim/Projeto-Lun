@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     [Header("Change Form")]
     public float changeFormDuration = 0.5f;
     [HideInInspector] public bool hasChangeFormInput;
-    private int formsIndex;
+    [HideInInspector]public int formsIndex;
     public VarForm[] forms;
     public VarForm currentVarForm;
     public VarForm selectedVarForm;
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         //get game manager instance
         gm = GameManager.Instance;
+
         //get components
         playerInput = GetComponent<PlayerInput>();
         thisRigidBody = GetComponent<Rigidbody>();

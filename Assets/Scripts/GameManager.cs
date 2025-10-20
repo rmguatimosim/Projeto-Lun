@@ -18,9 +18,6 @@ public class GameManager : MonoBehaviour
     public static Vector3 lastCheckpointPosition;
     public static bool checkpointReached = false;
 
-    // //Rendering
-    // [Header("Rendering")]
-    // public Camera worldUiCamera;
 
     //Physics
     [Header("Physics")]

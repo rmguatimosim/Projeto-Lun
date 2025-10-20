@@ -100,7 +100,7 @@ public class Data : MonoBehaviour
         if (gameObject.GetComponent<DoorScript>() != null)
         {
             var door = gameObject.GetComponent<DoorScript>();
-            if (door.varForm.varType == args.type)
+            if (door.varForm.varType == args.type && door.expectedData == args.content)
             {
                 content = args.content;
             }
