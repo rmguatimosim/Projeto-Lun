@@ -21,6 +21,13 @@ public class HealthScript : MonoBehaviour
             damage = damage
         });
     }
+        public void Heal()
+    {
+        OnHeal?.Invoke(this, new HealEventArgs
+        {
+            
+        });
+    }
     
     public bool IsDead()
     {

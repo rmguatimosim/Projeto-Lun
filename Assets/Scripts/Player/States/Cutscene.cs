@@ -7,7 +7,7 @@ namespace Player.States
     {
         private readonly PlayerController controller;
 
-        private float timePassed;
+        //private float timePassed;
 
         public Cutscene(PlayerController controller) : base("Cutscene")
         {

@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private InputAction transformAction;
     private InputAction copyAction;
     private InputAction storeAction;
+    public InputAction anyKeyAction;
 
     //Movement
     [Header("Movement")]
@@ -87,6 +88,9 @@ public class PlayerController : MonoBehaviour
 
     //cutscene lock
     [HideInInspector] public bool isInCutscene;
+
+    //tutorial
+
     
 
 
@@ -112,6 +116,7 @@ public class PlayerController : MonoBehaviour
         transformAction = playerInput.actions.FindAction("Transform");
         copyAction = playerInput.actions.FindAction("Copy");
         storeAction = playerInput.actions.FindAction("Store");
+        anyKeyAction = playerInput.actions.FindAction("AnyKey");
 
     }
 
@@ -317,7 +322,8 @@ public class PlayerController : MonoBehaviour
     }
      private void OnHeal(object sender, HealEventArgs args)
     {
-        
+        thisHealth.health = thisHealth.maxHealth;
+        gm.gameplayUI.SetEnergyBar();
     }
 
 

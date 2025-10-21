@@ -12,12 +12,15 @@ public class GameplayUI : MonoBehaviour
     private PlayerController pc;
 
     //display form and content
-    // [SerializeField] private GameObject objectContainer;
+    [Header("Forma e conteúdo")]
     [SerializeField] private TextMeshProUGUI typeText;
     [SerializeField] private TextMeshProUGUI currentType;
     [SerializeField] private TextMeshProUGUI value;
+
+    //tutorial
+    [Header("Tutorial")]
     [SerializeField] private GameObject tutorial;
-    
+    private bool hasPressedKey;
 
     //energy bar
     [Header("Energia")]
@@ -25,7 +28,12 @@ public class GameplayUI : MonoBehaviour
     public List<Sprite> energyIcons;
 
     //display  location
+    [Header("Localização")]
     [SerializeField] private TextMeshProUGUI location;
+
+    //display objective
+    [Header("Objetivo")]
+    [SerializeField] private TextMeshProUGUI objectiveText;
 
 
 
@@ -42,6 +50,12 @@ public class GameplayUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1)
+        {
+            hasPressedKey = true;
+            ToggleTutorial(false);
+            //pc.stateMachine.ChangeState(pc.idleState);
+        }
 
     }
 
@@ -90,9 +104,22 @@ public class GameplayUI : MonoBehaviour
         location.text = txt;
     }
 
-    public void ToggleTutorial()
+    public void ToggleTutorial(bool status)
     {
-        tutorial.SetActive(true);
+        if (hasPressedKey)
+        {
+            hasPressedKey = false;
+        }
+        tutorial.SetActive(status);
+        //pc.stateMachine.ChangeState(pc.cutsceneState);
     }
+
+    public void SetObjectiveText(string txt)
+    {
+        objectiveText.text = txt;
+    }
+
+
+
 
 }

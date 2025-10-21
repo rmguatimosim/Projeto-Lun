@@ -137,6 +137,15 @@ namespace Player
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""efa6896c-ee77-497f-87fd-1fe73de911a8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,39 @@ namespace Player
                     ""action"": ""Store"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""123cd892-89e5-45dc-9513-e1a7c4833545"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""891d7a63-43f6-4594-9193-7a7866fb004b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef9b419-5abd-4f49-a7e4-c3c8ead564f1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -306,6 +348,7 @@ namespace Player
             m_Player_Transform = m_Player.FindAction("Transform", throwIfNotFound: true);
             m_Player_Copy = m_Player.FindAction("Copy", throwIfNotFound: true);
             m_Player_Store = m_Player.FindAction("Store", throwIfNotFound: true);
+            m_Player_AnyKey = m_Player.FindAction("AnyKey", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -391,6 +434,7 @@ namespace Player
         private readonly InputAction m_Player_Transform;
         private readonly InputAction m_Player_Copy;
         private readonly InputAction m_Player_Store;
+        private readonly InputAction m_Player_AnyKey;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -422,6 +466,10 @@ namespace Player
             /// Provides access to the underlying input action "Player/Store".
             /// </summary>
             public InputAction @Store => m_Wrapper.m_Player_Store;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/AnyKey".
+            /// </summary>
+            public InputAction @AnyKey => m_Wrapper.m_Player_AnyKey;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -463,6 +511,9 @@ namespace Player
                 @Store.started += instance.OnStore;
                 @Store.performed += instance.OnStore;
                 @Store.canceled += instance.OnStore;
+                @AnyKey.started += instance.OnAnyKey;
+                @AnyKey.performed += instance.OnAnyKey;
+                @AnyKey.canceled += instance.OnAnyKey;
             }
 
             /// <summary>
@@ -489,6 +540,9 @@ namespace Player
                 @Store.started -= instance.OnStore;
                 @Store.performed -= instance.OnStore;
                 @Store.canceled -= instance.OnStore;
+                @AnyKey.started -= instance.OnAnyKey;
+                @AnyKey.performed -= instance.OnAnyKey;
+                @AnyKey.canceled -= instance.OnAnyKey;
             }
 
             /// <summary>
@@ -564,6 +618,13 @@ namespace Player
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnStore(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "AnyKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnAnyKey(InputAction.CallbackContext context);
         }
     }
 }
