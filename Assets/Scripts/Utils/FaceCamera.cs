@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    private Camera worldCamera; 
+    private Camera playerCamera; 
 
     void Awake()
     {
-        //worldCamera = GameManager.Instance.worldUiCamera;
+        playerCamera = GameManager.Instance.playerCamera;
     }
 
     // Update is called once per frame
@@ -14,7 +14,7 @@ public class FaceCamera : MonoBehaviour
     {
 
         //face camera
-        //transform.rotation = worldCamera.transform.rotation;
+        transform.rotation = playerCamera.transform.rotation;
         
     }
 }

@@ -6,7 +6,8 @@ public class MoveWithElevator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.SetParent(transform);
-            other.GetComponent<Animator>().SetBool("bCutscene", true);
+            //other.GetComponent<Animator>().SetBool("bCutscene", true);
+            other.GetComponent<PlayerController>().isInCutscene = true;
 
         }
     }
@@ -15,7 +16,8 @@ public class MoveWithElevator : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.SetParent(null);
-            other.GetComponent<Animator>().SetBool("bCutscene", false);
+            //other.GetComponent<Animator>().SetBool("bCutscene", false);
+            other.GetComponent<PlayerController>().isInCutscene = false;
         }
     }
 }

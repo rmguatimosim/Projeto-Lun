@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,7 +21,9 @@ public class GameplayUI : MonoBehaviour
     //tutorial
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject pressMessage;
     private bool hasPressedKey;
+    private bool canPressToClose;
 
     //energy bar
     [Header("Energia")]
@@ -45,16 +48,19 @@ public class GameplayUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ToggleTutorial(false);
+        pressMessage.SetActive(canPressToClose);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1)
+        if(!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1 && canPressToClose)
         {
             hasPressedKey = true;
             ToggleTutorial(false);
-            //pc.stateMachine.ChangeState(pc.idleState);
+            //pc.thisAnimator.SetBool("bCutscene", false);
+            pc.isInCutscene = false;
         }
 
     }
@@ -93,7 +99,6 @@ public class GameplayUI : MonoBehaviour
             value.text = pc.content.ToString();
         }
     }
-
     public void SetEnergyBar()
     {
         energyContainer.sprite = energyIcons[pc.thisHealth.health];
@@ -111,7 +116,10 @@ public class GameplayUI : MonoBehaviour
             hasPressedKey = false;
         }
         tutorial.SetActive(status);
-        //pc.stateMachine.ChangeState(pc.cutsceneState);
+        pressMessage.SetActive(false);
+        StartCoroutine(ShowPressAnyKeyMessage());
+        pc.isInCutscene = true;
+
     }
 
     public void SetObjectiveText(string txt)
@@ -119,6 +127,13 @@ public class GameplayUI : MonoBehaviour
         objectiveText.text = txt;
     }
 
+    //coroutine to show message to close tutorial window
+    private IEnumerator ShowPressAnyKeyMessage()
+    {
+        yield return new WaitForSeconds(3);
+        pressMessage.SetActive(true);
+        canPressToClose = true;
+    }
 
 
 

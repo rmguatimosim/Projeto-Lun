@@ -25,6 +25,8 @@ namespace Player.States
         {
             base.Update();
 
+            if (controller.isInCutscene) return;
+
             //Switch to Jump
             if (controller.hasJumpInput)
             {

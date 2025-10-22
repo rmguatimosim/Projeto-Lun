@@ -27,8 +27,7 @@ namespace Player.States
 
             // //ignore if in cutscene
             // var bossBattleHandler = GameManager.Instance.bossBattleHandler;
-            // var isInCutscene = bossBattleHandler.IsInCutscene();
-            // if (isInCutscene) return;
+            if (controller.isInCutscene) return;
 
             if (GameManager.Instance.isGameOver)
             {
