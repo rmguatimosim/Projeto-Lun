@@ -317,6 +317,7 @@ public class PlayerController : MonoBehaviour
     {
         thisHealth.health -= args.damage;
         gm.gameplayUI.SetEnergyBar();
+        gm.DecreaseScore();
         //switch to hurt
         stateMachine.ChangeState(hurtState);
     }

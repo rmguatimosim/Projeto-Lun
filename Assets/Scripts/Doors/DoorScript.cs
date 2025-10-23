@@ -1,4 +1,5 @@
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorScript : MonoBehaviour
@@ -90,10 +91,12 @@ public class DoorScript : MonoBehaviour
                 thisAnimator.SetBool("bDoorOpen", true);
                 isClosed = false;
                 isSolved = true;
+                GameManager.Instance.IncreaseScore();
             }
             else
             {
                 Debug.Log("Forma errada");
+                controller.thisHealth.Damage(1);
             }
         }
     }

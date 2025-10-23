@@ -38,6 +38,9 @@ public class GameplayUI : MonoBehaviour
     [Header("Objetivo")]
     [SerializeField] private TextMeshProUGUI objectiveText;
 
+    [Header("Score")]
+    [SerializeField] private TextMeshProUGUI scoreText;
+
 
 
     void Awake()
@@ -135,6 +138,11 @@ public class GameplayUI : MonoBehaviour
         canPressToClose = true;
     }
 
-
+    //method that updates the score;
+    public void SetScoreText(int score)
+    {
+        int result = score * 100;
+        scoreText.text = result.ToString();
+    }
 
 }

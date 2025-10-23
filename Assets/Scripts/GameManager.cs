@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
     public List<Interaction> interactionList;
     public GameObject player;
 
-    //Checkpoint
-    public static Vector3 lastCheckpointPosition;
-    public static bool checkpointReached = false;
+    //score
+    [Header("Score")]
+    private int score;
+    private int highestScore;
+    public AudioClip addScoreSound;
+    public AudioClip loseScoreSound;
 
     //camera
     public Camera playerCamera;
-
 
     //Physics
     [Header("Physics")]
@@ -30,11 +32,12 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public GameplayUI gameplayUI;
 
-    // //music
-    // [Header("Music")]
-    // public AudioSource gameplayMusic;
+    //music
+    [Header("Music")]
+    public AudioSource audioSource2D;
     // public AudioSource bossMusic;
-    // public AudioSource ambienceMusic;
+
+
 
 
     void Awake()
@@ -101,10 +104,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-        public void SetCheckpoint(Vector3 position)
+    public void IncreaseScore()
     {
-        lastCheckpointPosition = position;
-        checkpointReached = true;
+        score++;
+        gameplayUI.SetScoreText(score);
+        audioSource2D.PlayOneShot(addScoreSound, 0.7f);
     }
+    public void DecreaseScore()
+    {
+        score--;
+        gameplayUI.SetScoreText(score);
+        audioSource2D.PlayOneShot(loseScoreSound, 0.7f);
+    }
+
+
 
 }

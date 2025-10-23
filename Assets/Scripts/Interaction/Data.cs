@@ -66,6 +66,7 @@ public class Data : MonoBehaviour
 
     private void OnCopy(object sender, SaveContentArgs args)
     {
+        
         if (args.target.GetComponent<DoorScript>())
         {
             var door = args.target.GetComponent<DoorScript>();
@@ -76,6 +77,8 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Impossível receber valor de variável de tipo diferente");
+                pc.thisHealth.Damage(1);
+                
             }
         }
         else if (args.target.GetComponent<Switch>())
@@ -88,6 +91,7 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Impossível receber valor de variável de tipo diferente");
+                pc.thisHealth.Damage(1);
             }
         }
         else
@@ -97,17 +101,22 @@ public class Data : MonoBehaviour
     }
     private void OnStore(object sender, SaveContentArgs args)
     {
+        GameManager gm = GameManager.Instance;
         if (gameObject.GetComponent<DoorScript>() != null)
         {
             var door = gameObject.GetComponent<DoorScript>();
             if (door.varForm.varType == args.type && door.expectedData == args.content)
             {
                 content = args.content;
+                gm.IncreaseScore();
+                
             }
             else
             {
                 Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
+                
+
             }
         }
         if (gameObject.GetComponent<Switch>() != null)
@@ -116,11 +125,13 @@ public class Data : MonoBehaviour
             if (pressedSwitch.expectedVarForm.varType == args.type)
             {
                 content = args.content;
+                gm.IncreaseScore();
             }
             else
             {
                 Debug.Log("Tipo inválido para abrir a porta");
                 pc.thisHealth.Damage(1);
+                
             }
         }
         if (gameObject.GetComponent<ObstacleScript>() != null)
@@ -129,11 +140,13 @@ public class Data : MonoBehaviour
             if (obstacle.expectedVarForm.varType == args.type)
             {
                 content = args.content;
+                gm.IncreaseScore();
             }
             else
             {
                 Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
+                
             }
         }
         if (gameObject.GetComponent<PylonScript>() != null)
@@ -142,11 +155,13 @@ public class Data : MonoBehaviour
             if (pylon.varForm.varType == args.type)
             {
                 content = args.content;
+                gm.IncreaseScore();
             }
             else
             {
                 Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
+                
             }
         }
 

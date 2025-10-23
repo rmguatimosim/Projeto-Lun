@@ -75,6 +75,7 @@ namespace Player.States
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            if (controller.isInCutscene) return;
             //Create Vector
             Vector3 walkVector = new(controller.movementVector.x, 0, controller.movementVector.y);
             walkVector = controller.GetFoward() * walkVector;
