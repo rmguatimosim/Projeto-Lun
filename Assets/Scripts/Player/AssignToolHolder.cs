@@ -4,6 +4,11 @@ public class AssignToolHolder : MonoBehaviour
 {
     private PlayerController pc;
     public GameObject assignTool;
+    
+    
+    //triggers that this interaction enable
+    public GameObject tutorialTrigger;
+    public GameObject charDoorTutorialTrigger;
 
     void Awake()
     {
@@ -17,6 +22,8 @@ public class AssignToolHolder : MonoBehaviour
             pc.hasAssignTool = true;
             gameObject.GetComponent<BoxCollider>().enabled = false;
             assignTool.SetActive(false);
+            tutorialTrigger.SetActive(true);
+            charDoorTutorialTrigger.SetActive(true);
         }
     }
 }

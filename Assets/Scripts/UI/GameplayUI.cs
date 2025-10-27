@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {
+    private static WaitForSeconds _waitForSeconds3 = new WaitForSeconds(3);
     [SerializeField] private Canvas thisCanvas;
 
     [Header("Objects")]
@@ -22,8 +23,13 @@ public class GameplayUI : MonoBehaviour
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorial;
     [SerializeField] private GameObject pressMessage;
+    [SerializeField] private TextMeshProUGUI tutorialText;
+    private TutorialMessage tutorialMessagePT;
+    private int tutorialIndex;
     private bool hasPressedKey;
     private bool canPressToClose;
+    private bool hasNextPage;
+    private TutorialTrigger nextPage;
 
     //energy bar
     [Header("Energia")]
@@ -46,13 +52,14 @@ public class GameplayUI : MonoBehaviour
     void Awake()
     {
         pc = GameManager.Instance.player.GetComponent<PlayerController>();
+        tutorialMessagePT = new TutorialMessage();
+        nextPage = null;
 
     }
     // Start is called before the first frame update
     void Start()
     {
-        ToggleTutorial(false);
-        pressMessage.SetActive(canPressToClose);
+        tutorialIndex = 0;
     }
 
     // Update is called once per frame
@@ -60,10 +67,16 @@ public class GameplayUI : MonoBehaviour
     {
         if(!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1 && canPressToClose)
         {
+            
             hasPressedKey = true;
-            ToggleTutorial(false);
-            //pc.thisAnimator.SetBool("bCutscene", false);
+            tutorial.SetActive(false);
+            canPressToClose = false;
             pc.isInCutscene = false;
+            tutorialIndex++;
+            if (hasNextPage)
+            {
+                ToggleTutorial(nextPage);
+            }
         }
 
     }
@@ -112,18 +125,22 @@ public class GameplayUI : MonoBehaviour
         location.text = txt;
     }
 
-    public void ToggleTutorial(bool status)
+    public void ToggleTutorial(TutorialTrigger trigger)
     {
         if (hasPressedKey)
         {
             hasPressedKey = false;
         }
-        tutorial.SetActive(status);
+        tutorial.SetActive(true);
+        tutorialText.text = tutorialMessagePT.Msg[tutorialIndex];
         pressMessage.SetActive(false);
         StartCoroutine(ShowPressAnyKeyMessage());
         pc.isInCutscene = true;
-
+        hasNextPage = trigger.hasNextPage;
+        nextPage = trigger.nextPage;
     }
+
+
 
     public void SetObjectiveText(string txt)
     {
@@ -133,7 +150,7 @@ public class GameplayUI : MonoBehaviour
     //coroutine to show message to close tutorial window
     private IEnumerator ShowPressAnyKeyMessage()
     {
-        yield return new WaitForSeconds(3);
+        yield return _waitForSeconds3;
         pressMessage.SetActive(true);
         canPressToClose = true;
     }

@@ -434,6 +434,15 @@ MonoBehaviour:
   thisRigidBody: {fileID: 4260640356240204392}
   thisAnimator: {fileID: 20872075792676515}
   thisHealth: {fileID: 0}
+  anyKeyAction:
+    m_Name: Any Key
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e6f64990-6797-4027-819c-ec788ad9d49b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   movementVector: {x: 0, y: 0}
   movementSpeed: 3
   maxSpeed: 4

@@ -1,5 +1,5 @@
 using Player;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class DoorScript : MonoBehaviour
@@ -101,7 +101,7 @@ public class DoorScript : MonoBehaviour
         }
     }
     
-
+    //trigger to close the door
     void OnTriggerExit(Collider other)
     {
         if (!isClosed)

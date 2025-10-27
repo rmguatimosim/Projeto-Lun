@@ -1378,6 +1378,7 @@ MonoBehaviour:
   value: {fileID: 3231806777778792255}
   tutorial: {fileID: 4622572468798531398}
   pressMessage: {fileID: 129674681311352977}
+  tutorialText: {fileID: 947913404504164322}
   energyContainer: {fileID: 7552505121061289808}
   energyIcons:
   - {fileID: 21300000, guid: 59b197ace150cb8498f6b79e28fca228, type: 3}

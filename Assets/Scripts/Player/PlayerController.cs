@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EventArgs;
 using Player;
 using Player.States;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
