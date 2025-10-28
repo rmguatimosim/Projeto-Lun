@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
@@ -47,6 +48,9 @@ public class GameplayUI : MonoBehaviour
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
 
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOverScreen;
+
 
 
     void Awake()
@@ -60,14 +64,15 @@ public class GameplayUI : MonoBehaviour
     void Start()
     {
         tutorialIndex = 0;
+        gameOverScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1 && canPressToClose)
+        if (!hasPressedKey && pc.anyKeyAction.ReadValue<float>() == 1 && canPressToClose)
         {
-            
+
             hasPressedKey = true;
             tutorial.SetActive(false);
             canPressToClose = false;
@@ -102,7 +107,7 @@ public class GameplayUI : MonoBehaviour
         }
         else if (pc.currentVarForm.varType == Player.VarType.Char)
         {
-            if(pc.content == 0)
+            if (pc.content == 0)
             {
                 value.text = "' '";
                 return;
@@ -160,6 +165,30 @@ public class GameplayUI : MonoBehaviour
     {
         int result = score * 100;
         scoreText.text = result.ToString();
+    }
+
+    // game over methods
+
+    public void ShowGameOverScreen()
+    {
+        StartCoroutine(GameOverTimer());
+    }
+
+    public void MainMenuButtonPressed()
+    {
+        StartCoroutine(GoToMainMenu());
+    }
+
+    private IEnumerator GoToMainMenu()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Scenes/TittleScreen");
+    }
+
+    private IEnumerator GameOverTimer()
+    {
+        yield return new WaitForSeconds(2);
+        gameOverScreen.SetActive(true);
     }
 
 }

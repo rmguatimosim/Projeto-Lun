@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using EventArgs;
 using Player;
 using Player.States;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -90,7 +89,6 @@ public class PlayerController : MonoBehaviour
     //cutscene lock
     [HideInInspector] public bool isInCutscene;
 
-    //tutorial
 
     
 
@@ -164,6 +162,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gm.isGameOver)
+        {
+            //show mouse cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
 
         //create input vector
         movementVector = moveAction.ReadValue<Vector2>();

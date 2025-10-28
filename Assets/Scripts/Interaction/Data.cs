@@ -14,7 +14,8 @@ public class Data : MonoBehaviour
     [Header("Interaction")]
     public Interaction interaction;
     public int content;
-    [HideInInspector]public bool canReceive = false;
+    [HideInInspector] public bool canReceive = false;
+    private bool canCopy;
 
     public event EventHandler<SaveContentArgs> OnStoring;
 
@@ -40,6 +41,7 @@ public class Data : MonoBehaviour
         if (args.action == InteractionType.copy)
         {
             Debug.Log("entrou no copy");
+            canCopy = true;
             pc.Copy(content, gameObject);
             pc.hasInteracted = true;
             return;
@@ -66,7 +68,7 @@ public class Data : MonoBehaviour
 
     private void OnCopy(object sender, SaveContentArgs args)
     {
-        
+        if (!canCopy) return;
         if (args.target.GetComponent<DoorScript>())
         {
             var door = args.target.GetComponent<DoorScript>();
@@ -78,7 +80,7 @@ public class Data : MonoBehaviour
             {
                 Debug.Log("Impossível receber valor de variável de tipo diferente");
                 pc.thisHealth.Damage(1);
-                
+
             }
         }
         else if (args.target.GetComponent<Switch>())
@@ -98,6 +100,7 @@ public class Data : MonoBehaviour
         {
             pc.content = args.content;
         }
+        canCopy = false;
     }
     private void OnStore(object sender, SaveContentArgs args)
     {
@@ -113,7 +116,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Tipo inválido");
+                //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
                 
 
@@ -129,7 +132,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Tipo inválido para abrir a porta");
+                //Debug.Log("Tipo inválido para abrir a porta");
                 pc.thisHealth.Damage(1);
                 
             }
@@ -144,7 +147,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Tipo inválido");
+                //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
                 
             }
@@ -159,7 +162,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Tipo inválido");
+                //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
                 
             }

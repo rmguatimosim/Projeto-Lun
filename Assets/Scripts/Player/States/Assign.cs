@@ -42,6 +42,7 @@ namespace Player.States
             controller.hasStoreInput = false;
             controller.hasInteracted = false;
             controller.thisAnimator.ResetTrigger("tStore");
+            controller.thisAnimator.ResetTrigger("tCopy");
 
         }
 
