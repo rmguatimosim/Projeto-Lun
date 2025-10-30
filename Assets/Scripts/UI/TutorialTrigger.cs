@@ -1,10 +1,11 @@
-using NUnit.Framework;
+
 using UnityEngine;
 
 public class TutorialTrigger : MonoBehaviour
 {
     public bool hasNextPage;
     public TutorialTrigger nextPage;
+    public int msgIndex;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameplayUI ui = GameManager.Instance.gameplayUI;
-            ui.ToggleTutorial(this);
+            ui.ToggleTutorial(this, msgIndex);
         }
     }
 

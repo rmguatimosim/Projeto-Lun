@@ -140,7 +140,7 @@ public class Data : MonoBehaviour
         if (gameObject.GetComponent<ObstacleScript>() != null)
         {
             var obstacle = gameObject.GetComponent<ObstacleScript>();
-            if (obstacle.expectedVarForm.varType == args.type)
+            if (obstacle.expectedVarForm.varType == args.type && args.content == obstacle.expectedData)
             {
                 content = args.content;
                 gm.IncreaseScore();

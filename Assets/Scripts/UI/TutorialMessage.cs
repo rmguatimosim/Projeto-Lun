@@ -11,7 +11,7 @@ public class TutorialMessage
         "Portas do tipo CHAR precisam ter seu display consertado para poderem funcionar.", //7
         "Portas do tipo INT precisam da senha correta para poderem funcionar.", //8
         "A estação de recarga pode encher a sua energia completamente.", //9
-        "Porém ela só funciona uma vez. Use-a com sabedoria.", //10
+        "Porém ela só funcionará uma vez. Use-a com sabedoria.", //10
         "Obstáculos do tipo INT podem ter sua altura alterada.", //11
         "Botões são variáveis do tipo BOOL e funcionam de acordo com seu estado.", //12
         "Placeholder", //13

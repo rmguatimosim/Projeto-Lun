@@ -8,11 +8,11 @@ using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {
-    private static WaitForSeconds _waitForSeconds3 = new WaitForSeconds(3);
     [SerializeField] private Canvas thisCanvas;
 
     [Header("Objects")]
     private PlayerController pc;
+    private GameManager gm;
 
     //display form and content
     [Header("Forma e conteúdo")]
@@ -32,6 +32,7 @@ public class GameplayUI : MonoBehaviour
     private bool hasNextPage;
     private TutorialTrigger nextPage;
 
+
     //energy bar
     [Header("Energia")]
     public Image energyContainer;
@@ -44,19 +45,27 @@ public class GameplayUI : MonoBehaviour
     //display objective
     [Header("Objetivo")]
     [SerializeField] private TextMeshProUGUI objectiveText;
+    private ObjectiveText obTextPT;
 
     [Header("Score")]
+    private ScoreManager sm;
+    [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private GameObject newRecord;
+
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
-
+    [SerializeField] private TextMeshProUGUI endGameScoreText;
 
 
     void Awake()
     {
-        pc = GameManager.Instance.player.GetComponent<PlayerController>();
+        gm = GameManager.Instance;
+        sm = ScoreManager.Instance;
+        pc = gm.player.GetComponent<PlayerController>();
         tutorialMessagePT = new TutorialMessage();
+        obTextPT = new ObjectiveText();
         nextPage = null;
 
     }
@@ -65,6 +74,8 @@ public class GameplayUI : MonoBehaviour
     {
         tutorialIndex = 0;
         gameOverScreen.SetActive(false);
+        playerName.text = sm.GetPlayerName();
+
     }
 
     // Update is called once per frame
@@ -77,10 +88,9 @@ public class GameplayUI : MonoBehaviour
             tutorial.SetActive(false);
             canPressToClose = false;
             pc.isInCutscene = false;
-            tutorialIndex++;
             if (hasNextPage)
             {
-                ToggleTutorial(nextPage);
+                ToggleTutorial(nextPage, tutorialIndex+1);
             }
         }
 
@@ -130,45 +140,42 @@ public class GameplayUI : MonoBehaviour
         location.text = txt;
     }
 
-    public void ToggleTutorial(TutorialTrigger trigger)
+    public void ToggleTutorial(TutorialTrigger trigger, int index)
     {
         if (hasPressedKey)
         {
             hasPressedKey = false;
         }
         tutorial.SetActive(true);
-        tutorialText.text = tutorialMessagePT.Msg[tutorialIndex];
+        tutorialText.text = tutorialMessagePT.Msg[index];
         pressMessage.SetActive(false);
         StartCoroutine(ShowPressAnyKeyMessage());
         pc.isInCutscene = true;
         hasNextPage = trigger.hasNextPage;
         nextPage = trigger.nextPage;
+        tutorialIndex = index;
     }
 
-
-
-    public void SetObjectiveText(string txt)
+    public void SetObjectiveText(int index)
     {
-        objectiveText.text = txt;
+        objectiveText.text = obTextPT.Msg[index];
     }
 
     //coroutine to show message to close tutorial window
     private IEnumerator ShowPressAnyKeyMessage()
     {
-        yield return _waitForSeconds3;
+        yield return new WaitForSeconds(1);
         pressMessage.SetActive(true);
         canPressToClose = true;
     }
 
     //method that updates the score;
-    public void SetScoreText(int score)
-    {
-        int result = score * 100;
-        scoreText.text = result.ToString();
+    public void SetScoreText()
+    {        
+        scoreText.text = gm.PrintScore();
     }
 
     // game over methods
-
     public void ShowGameOverScreen()
     {
         StartCoroutine(GameOverTimer());
@@ -182,7 +189,7 @@ public class GameplayUI : MonoBehaviour
     private IEnumerator GoToMainMenu()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("Scenes/TittleScreen");
+        SceneManager.LoadScene("Scenes/TitleScreen");
     }
 
     private IEnumerator GameOverTimer()
@@ -190,5 +197,17 @@ public class GameplayUI : MonoBehaviour
         yield return new WaitForSeconds(2);
         gameOverScreen.SetActive(true);
     }
+
+    public void SetEndGameScore()
+    {
+        endGameScoreText.text = gm.PrintScore();
+    }
+
+    public void ShowNewRecord(bool b)
+    {
+        newRecord.SetActive(b);
+    }
+
+
 
 }

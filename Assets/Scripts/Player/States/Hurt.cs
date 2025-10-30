@@ -18,9 +18,6 @@ namespace Player.States
         {
             base.Enter();
 
-            // //update UI
-            // var gameplayUI = GameManager.Instance.gameplayUI;
-            // gameplayUI.playerHealthBar.SetHealth(controller.thisLife.health);
         }
 
         public override void Exit()
@@ -37,7 +34,7 @@ namespace Player.States
             if (controller.thisHealth.IsDead())
             {
                 controller.stateMachine.ChangeState(controller.deadState);
-                GameManager.Instance.isGameOver = true;
+                GameManager.Instance.Endgame();
                 return;
             }
             //switch to change form

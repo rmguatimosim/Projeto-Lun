@@ -14,7 +14,7 @@ namespace Player.States
             base.Enter();
             controller.thisAnimator.SetTrigger("tGameOver");
 
-            GameManager.Instance.gameplayUI.ShowGameOverScreen();
+            GameManager.Instance.Endgame();
             
 
             // //make player invulnerable

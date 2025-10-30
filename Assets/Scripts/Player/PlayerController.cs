@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour
         //receive jump input
         //hasJumpInput = jumpAction.ReadValue<float>() == 1;
 
+        
         //has changeForm hold input
         transformAction.performed += context =>
         {
@@ -184,10 +185,11 @@ public class PlayerController : MonoBehaviour
                 //if (!hasJumpInput && currentVarForm != selectedVarForm)
                 if (!hasJumpInput)
                 {
+                    if (selectedVarForm.varType == VarType.Null && selectedVarForm == currentVarForm) return;
                     hasChangeFormInput = true;
                 }
             }
-            if (context.interaction is PressInteraction && hasToggleForm == false)
+            if (context.interaction is PressInteraction && hasToggleForm == false && !isInCutscene)
             {
                 hasToggleForm = true;
                 formsIndex++;

@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
 
     //score
     [Header("Score")]
+    private ScoreManager sm;
     private int score;
-    private int highestScore;
+    private static readonly int scoreFactor = 100;
+
     public AudioClip addScoreSound;
     public AudioClip loseScoreSound;
 
@@ -38,8 +40,6 @@ public class GameManager : MonoBehaviour
     // public AudioSource bossMusic;
 
 
-
-
     void Awake()
     {
         //Singleton
@@ -52,7 +52,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-
+        //initialize score manager
+        sm = ScoreManager.Instance;
     }
     void Start()
     {
@@ -107,14 +108,39 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore()
     {
         score++;
-        gameplayUI.SetScoreText(score);
+        gameplayUI.SetScoreText();
         audioSource2D.PlayOneShot(addScoreSound, 0.7f);
     }
     public void DecreaseScore()
     {
         score--;
-        gameplayUI.SetScoreText(score);
+        if (score < 0) score = 0;
+        gameplayUI.SetScoreText();
         audioSource2D.PlayOneShot(loseScoreSound, 0.7f);
+    }
+
+    public string PrintScore()
+    {
+        return (score * scoreFactor).ToString();
+    }
+
+    public void Endgame()
+    {
+        var finalScore = score * scoreFactor;
+        isGameOver = true;
+        gameplayUI.SetEndGameScore();
+        gameplayUI.ShowGameOverScreen();
+        if (sm.IsNewRecord(finalScore))
+        {
+            gameplayUI.ShowNewRecord(true);
+            sm.SaveNewRecord(finalScore);
+        }
+        else
+        {
+            gameplayUI.ShowNewRecord(false);
+        }
+        
+        
     }
 
 
