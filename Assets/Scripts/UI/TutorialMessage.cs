@@ -1,6 +1,7 @@
 public class TutorialMessage
 {
-    private string[] msg = {
+    private string[] msg =
+    {
         "Utilize os botões WASD para movimentar o personagem.", //tutorial 0
         "Movimente o mouse para mover a câmera.", //tutorial 1
         "Pressione a tecla Q para navegar entre os tipos de variável.", //2

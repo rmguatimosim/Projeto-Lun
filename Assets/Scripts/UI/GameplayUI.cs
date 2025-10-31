@@ -25,12 +25,14 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private GameObject tutorial;
     [SerializeField] private GameObject pressMessage;
     [SerializeField] private TextMeshProUGUI tutorialText;
+    public Image tutorialImage;
     private TutorialMessage tutorialMessagePT;
     private int tutorialIndex;
     private bool hasPressedKey;
     private bool canPressToClose;
     private bool hasNextPage;
     private TutorialTrigger nextPage;
+    public List<Sprite> tutorialImages;
 
 
     //energy bar
@@ -52,6 +54,10 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject newRecord;
+
+    [Header("Diálogo")]
+    [SerializeField] private GameObject dialogBox;
+    [SerializeField] private TextMeshProUGUI dialogContent;
 
 
     [Header("Game Over")]
@@ -148,6 +154,7 @@ public class GameplayUI : MonoBehaviour
         }
         tutorial.SetActive(true);
         tutorialText.text = tutorialMessagePT.Msg[index];
+        tutorialImage.sprite = tutorialImages[index];
         pressMessage.SetActive(false);
         StartCoroutine(ShowPressAnyKeyMessage());
         pc.isInCutscene = true;

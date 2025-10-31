@@ -9,6 +9,7 @@ public class AssignToolHolder : MonoBehaviour
     //triggers that this interaction enable
     public GameObject tutorialTrigger;
     public GameObject charDoorTutorialTrigger;
+    public GameObject objectiveTrigger;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class AssignToolHolder : MonoBehaviour
             assignTool.SetActive(false);
             tutorialTrigger.SetActive(true);
             charDoorTutorialTrigger.SetActive(true);
+            objectiveTrigger.SetActive(true);
         }
     }
 }

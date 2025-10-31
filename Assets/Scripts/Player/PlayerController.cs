@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         //create input vector
         movementVector = moveAction.ReadValue<Vector2>();
 
+
         //receive jump input
         //hasJumpInput = jumpAction.ReadValue<float>() == 1;
 

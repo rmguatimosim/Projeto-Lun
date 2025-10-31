@@ -11,4 +11,9 @@ public class ObjectiveTrigger : MonoBehaviour
             ui.SetObjectiveText(objectiveIndex);
         }
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        Destroy(this);
+    }
 }

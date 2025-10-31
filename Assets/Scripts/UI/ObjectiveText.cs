@@ -1,11 +1,11 @@
 public class ObjectiveText
 {
     private string[] msg = {
-        "Encontre a Ferramenta de Atribuição na Sala de Equipamentos", //0
-        "Placeholder", //0
-        "Placeholder", //0
-        "Placeholder", //0
-        "Placeholder", //0
+        "Busque a Ferramenta de Atribuição na Sala de Equipamentos", //0
+        "Vá até o Reator", //1
+        "Verifique o Depósito Principal", //2
+        "Encontre um caminho alternativo", //3
+        "Encontre uma forma de lidar com o Bug", //4
 
     };
 

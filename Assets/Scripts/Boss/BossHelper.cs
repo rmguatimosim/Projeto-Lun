@@ -56,7 +56,7 @@ public class MeleeCreatureHelper
         vecToPlayer.y = 0;
         vecToPlayer.Normalize();
         var desiredRotation = Quaternion.LookRotation(vecToPlayer);
-        var newRotation = Quaternion.LerpUnclamped(transform.rotation, desiredRotation, 0.1f);
+        var newRotation = Quaternion.LerpUnclamped(transform.rotation, desiredRotation, 0.5f);
         transform.rotation = newRotation;
         controller.avatar.rotation = newRotation;         
     }

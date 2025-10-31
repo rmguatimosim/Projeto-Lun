@@ -11,6 +11,7 @@ namespace Player.States
             this.controller = controller;
 
         }
+
         public override void Enter()
         {
             base.Enter();
@@ -24,7 +25,6 @@ namespace Player.States
         public override void Update()
         {
             base.Update();
-
             if (controller.isInCutscene) return;
 
             //Switch to Jump
@@ -55,7 +55,6 @@ namespace Player.States
             // Footstep!
             float velocity = controller.thisRigidBody.linearVelocity.magnitude;
             float velocityRate = velocity / controller.maxSpeed;
-            //footstepCooldown -= Time.deltaTime * velocityRate;
             footstepCooldown -= Time.deltaTime * velocityRate;
             if (footstepCooldown <= 0f)
             {
