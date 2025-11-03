@@ -58,6 +58,12 @@ public class GameplayUI : MonoBehaviour
     [Header("Diálogo")]
     [SerializeField] private GameObject dialogBox;
     [SerializeField] private TextMeshProUGUI dialogContent;
+    private readonly float typingSpeed = 0.05f;
+    private Coroutine closeCoroutine;
+    private Coroutine typingCoroutine;
+
+
+
 
 
     [Header("Game Over")]
@@ -71,8 +77,9 @@ public class GameplayUI : MonoBehaviour
         sm = ScoreManager.Instance;
         pc = gm.player.GetComponent<PlayerController>();
         tutorialMessagePT = new TutorialMessage();
-        obTextPT = new ObjectiveText();
         nextPage = null;
+        obTextPT = new ObjectiveText();
+
 
     }
     // Start is called before the first frame update
@@ -81,6 +88,7 @@ public class GameplayUI : MonoBehaviour
         tutorialIndex = 0;
         gameOverScreen.SetActive(false);
         playerName.text = sm.GetPlayerName();
+
 
     }
 
@@ -102,6 +110,7 @@ public class GameplayUI : MonoBehaviour
 
     }
 
+    // form display methods
     public void SetTypeText()
     {
         typeText.text = pc.selectedVarForm.varType.ToString();
@@ -136,16 +145,26 @@ public class GameplayUI : MonoBehaviour
             value.text = pc.content.ToString();
         }
     }
+
+    //energy bar methods
     public void SetEnergyBar()
     {
         energyContainer.sprite = energyIcons[pc.thisHealth.health];
     }
 
+    // location display methods
     public void SetLocationText(string txt)
     {
         location.text = txt;
     }
 
+    //objective display methods
+    public void SetObjectiveText(int index)
+    {
+        objectiveText.text = obTextPT.Msg[index];
+    }
+
+    //tutorial methods
     public void ToggleTutorial(TutorialTrigger trigger, int index)
     {
         if (hasPressedKey)
@@ -162,15 +181,9 @@ public class GameplayUI : MonoBehaviour
         nextPage = trigger.nextPage;
         tutorialIndex = index;
     }
-
-    public void SetObjectiveText(int index)
-    {
-        objectiveText.text = obTextPT.Msg[index];
-    }
-
-    //coroutine to show message to close tutorial window
     private IEnumerator ShowPressAnyKeyMessage()
     {
+        //coroutine to show message to close tutorial window
         yield return new WaitForSeconds(1);
         pressMessage.SetActive(true);
         canPressToClose = true;
@@ -178,8 +191,61 @@ public class GameplayUI : MonoBehaviour
 
     //method that updates the score;
     public void SetScoreText()
-    {        
+    {
         scoreText.text = gm.PrintScore();
+    }
+
+    //dialog box methods
+    public void SetDialogText(DialogEntry entry)
+    {
+        dialogBox.SetActive(true);
+        
+            // Stop previous typing coroutine
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        // Stop previous close coroutine
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+            closeCoroutine = null;
+        }
+
+        // Start new typing coroutine
+        typingCoroutine = StartCoroutine(TypeDialogText(entry.key));
+
+    }
+
+    private IEnumerator TypeDialogText(string key)
+    {
+        //create effect of text being typed 
+        string text = gm.dialogDatabase.GetDialog(key);
+        dialogContent.text = text;
+        dialogContent.ForceMeshUpdate();
+        int contentLength = dialogContent.textInfo.characterCount;
+        for (int i = 0; i<=contentLength; i++ )
+        {
+            dialogContent.maxVisibleCharacters = i;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+        if (closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+        }
+
+        // Start new close coroutine
+        closeCoroutine = StartCoroutine(DialogBoxClose(gm.dialogDatabase.CalculateTimeToClose(key)));
+
+    }
+
+    private IEnumerator DialogBoxClose(float closeTimer)
+    {
+        //timer after which the dialog window will close automatically
+        yield return new WaitForSeconds(closeTimer);
+        dialogBox.SetActive(false);
     }
 
     // game over methods
@@ -187,33 +253,30 @@ public class GameplayUI : MonoBehaviour
     {
         StartCoroutine(GameOverTimer());
     }
-
     public void MainMenuButtonPressed()
     {
         StartCoroutine(GoToMainMenu());
     }
-
     private IEnumerator GoToMainMenu()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Scenes/TitleScreen");
     }
-
     private IEnumerator GameOverTimer()
     {
         yield return new WaitForSeconds(2);
         gameOverScreen.SetActive(true);
     }
-
     public void SetEndGameScore()
     {
         endGameScoreText.text = gm.PrintScore();
     }
-
     public void ShowNewRecord(bool b)
     {
         newRecord.SetActive(b);
     }
+
+
 
 
 

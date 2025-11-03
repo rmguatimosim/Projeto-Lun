@@ -9,6 +9,8 @@ public class Data : MonoBehaviour
 {
     //components
     private PlayerController pc;
+    private GameManager gm;
+    private GameplayUI ui;
 
     //interaction
     [Header("Interaction")]
@@ -17,11 +19,17 @@ public class Data : MonoBehaviour
     [HideInInspector] public bool canReceive = false;
     private bool canCopy;
 
+    //dialog
+    [Header("Diálogo")]
+    public DialogEntry damageDialog;
+
     public event EventHandler<SaveContentArgs> OnStoring;
 
     void Awake()
     {
-        pc = GameManager.Instance.player.GetComponent<PlayerController>();
+        gm = GameManager.Instance;
+        pc = gm.player.GetComponent<PlayerController>();
+        ui = gm.gameplayUI;
     }
 
     void Start()
@@ -29,6 +37,7 @@ public class Data : MonoBehaviour
         interaction.OnInteraction += OnInteraction;
         pc.OnCopy += OnCopy;
         this.OnStoring += OnStore;
+
     }
 
     private void OnInteraction(object sender, InteractionEventArgs args)
@@ -40,7 +49,7 @@ public class Data : MonoBehaviour
         }
         if (args.action == InteractionType.copy)
         {
-            Debug.Log("entrou no copy");
+            //Debug.Log("entrou no copy");
             canCopy = true;
             pc.Copy(content, gameObject);
             pc.hasInteracted = true;
@@ -50,7 +59,7 @@ public class Data : MonoBehaviour
         if (args.action == InteractionType.store && canReceive)
         {
             Store();
-            Debug.Log("entrou no store");
+            //Debug.Log("entrou no store");
             pc.hasInteracted = true;
             return;
         }
@@ -79,7 +88,9 @@ public class Data : MonoBehaviour
             else
             {
                 Debug.Log("Impossível receber valor de variável de tipo diferente");
-                pc.thisHealth.Damage(1);
+                //pc.thisHealth.Damage(1);
+                DealDamageWithDialog(1);
+
 
             }
         }
@@ -112,13 +123,13 @@ public class Data : MonoBehaviour
             {
                 content = args.content;
                 gm.IncreaseScore();
-                
+
             }
             else
             {
                 //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
-                
+
 
             }
         }
@@ -134,7 +145,7 @@ public class Data : MonoBehaviour
             {
                 //Debug.Log("Tipo inválido para abrir a porta");
                 pc.thisHealth.Damage(1);
-                
+
             }
         }
         if (gameObject.GetComponent<ObstacleScript>() != null)
@@ -149,7 +160,7 @@ public class Data : MonoBehaviour
             {
                 //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
-                
+
             }
         }
         if (gameObject.GetComponent<PylonScript>() != null)
@@ -164,11 +175,20 @@ public class Data : MonoBehaviour
             {
                 //Debug.Log("Tipo inválido");
                 pc.thisHealth.Damage(1);
-                
+
             }
         }
 
         pc.UpdateUI();
+    }
+    
+    private void DealDamageWithDialog(int amount)
+    {
+        pc.thisHealth.Damage(amount);
+        if (damageDialog != null)
+        {
+            ui.SetDialogText(damageDialog);
+        }
     }
     
 

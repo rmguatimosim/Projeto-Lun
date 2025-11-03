@@ -330,12 +330,12 @@ public class PlayerController : MonoBehaviour
         //switch to hurt
         stateMachine.ChangeState(hurtState);
     }
-     private void OnHeal(object sender, HealEventArgs args)
+    private void OnHeal(object sender, HealEventArgs args)
     {
         thisHealth.health = thisHealth.maxHealth;
         gm.gameplayUI.SetEnergyBar();
     }
-
+    
 
 
 }

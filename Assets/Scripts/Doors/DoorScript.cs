@@ -26,6 +26,9 @@ public class DoorScript : MonoBehaviour
     [HideInInspector]public bool isActive;
     public int expectedData = -1;
 
+    [Header("Mensagem de erro")]
+    public DialogEntry dialog;
+
 
     void Awake()
     {
@@ -65,14 +68,14 @@ public class DoorScript : MonoBehaviour
 
             }
         }
-        if (isSolved && !colorIsNormal)
-        {
-            foreach (MeshRenderer renderer in doorRenderers)
-            {
-                renderer.material = activeDoorMaterial;
-            }
-            colorIsNormal = true;
-        }
+        // if (isSolved && !colorIsNormal)
+        // {
+        //     foreach (MeshRenderer renderer in doorRenderers)
+        //     {
+        //         renderer.material = activeDoorMaterial;
+        //     }
+        //     colorIsNormal = true;
+        // }
     }
 
     void OnTriggerEnter(Collider other)
@@ -95,7 +98,8 @@ public class DoorScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("Forma errada");
+                GameManager.Instance.gameplayUI.SetDialogText(dialog);
+
                 controller.thisHealth.Damage(1);
             }
         }

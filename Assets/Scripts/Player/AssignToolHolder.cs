@@ -10,6 +10,11 @@ public class AssignToolHolder : MonoBehaviour
     public GameObject tutorialTrigger;
     public GameObject charDoorTutorialTrigger;
     public GameObject objectiveTrigger;
+    public GameObject dialogTrigger;
+
+    //triggers char door dialog
+    public GameObject charDoorHasTool;
+    public GameObject charDoorNoTool;
 
     void Awake()
     {
@@ -26,6 +31,12 @@ public class AssignToolHolder : MonoBehaviour
             tutorialTrigger.SetActive(true);
             charDoorTutorialTrigger.SetActive(true);
             objectiveTrigger.SetActive(true);
+            dialogTrigger.SetActive(true);
+            charDoorHasTool.SetActive(true);
+            if (charDoorNoTool != null)
+            {
+                Destroy(charDoorNoTool);                
+            }
         }
     }
 }

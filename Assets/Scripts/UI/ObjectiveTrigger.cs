@@ -14,6 +14,6 @@ public class ObjectiveTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

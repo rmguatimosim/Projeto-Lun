@@ -765,6 +765,7 @@ MonoBehaviour:
   puzzleDisplay: {fileID: 5960614693881686595}
   isActive: 0
   expectedData: 0
+  dialog: {fileID: 11400000, guid: d4a7900e2f8d7f54d98ab3e8b8cd9e43, type: 2}
 --- !u!114 &6702145890968978123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +794,7 @@ MonoBehaviour:
   interaction: {fileID: 6702145890968978123}
   content: 0
   canReceive: 1
+  damageDialog: {fileID: 11400000, guid: a44b2e65b029b7244a9d650ac1bba895, type: 2}
 --- !u!95 &3967691187372201135
 Animator:
   serializedVersion: 7

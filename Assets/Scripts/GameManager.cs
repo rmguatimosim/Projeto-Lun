@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     private ScoreManager sm;
     private int score;
     private static readonly int scoreFactor = 100;
-
     public AudioClip addScoreSound;
     public AudioClip loseScoreSound;
 
@@ -38,6 +37,9 @@ public class GameManager : MonoBehaviour
     [Header("Music")]
     public AudioSource audioSource2D;
     // public AudioSource bossMusic;
+
+    //Dialog database
+    public DialogDatabase dialogDatabase;
 
 
     void Awake()
