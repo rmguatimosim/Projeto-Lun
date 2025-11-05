@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class MeleeCreatureController : MonoBehaviour
 {
+    //game manager instance
+    private GameManager gm;
+
+    //components
     [HideInInspector] public MeleeCreatureHelper helper;
     [HideInInspector] public NavMeshAgent thisAgent;
     [HideInInspector] public Animator thisAnimator;
@@ -43,17 +47,28 @@ public class MeleeCreatureController : MonoBehaviour
     [Header("Hurt")]
     public float hurtDuration = 1f;
 
-    [Header("Dead")]
-    public float destroyIfFar = 30f;
+    // [Header("Dead")]
+    // public float destroyIfFar = 30f;
 
     [Header("Effects")]
     public GameObject knockoutEffect;
 
+    [Header("Efeitos Sonoros")]
+    public AudioSource audioSource;
+    public AudioClip detectPlayerSound;
+    public AudioClip hitWallSound;
+    public AudioClip footStepSound;
+
+    [Header("Diálogo")]
+    public DialogEntry damagePlayerDialog;
 
     void Awake()
     {
         // start helper
         this.helper = new MeleeCreatureHelper(this);
+
+        //get game manager instance
+        gm = GameManager.Instance;
 
         //Get components
         thisAgent = GetComponent<NavMeshAgent>();
@@ -138,8 +153,9 @@ public class MeleeCreatureController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Game Over");
-            GameManager.Instance.player.GetComponent<HealthScript>().Damage(2);
+
+            gm.player.GetComponent<HealthScript>().Damage(2);
+            gm.gameplayUI.SetDialogText(damagePlayerDialog);
         }
         if (collision.gameObject.CompareTag("Fragment"))
         {

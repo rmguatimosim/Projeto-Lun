@@ -10,12 +10,10 @@ public class DialogTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameplayUI ui = GameManager.Instance.gameplayUI;
-            ui.SetDialogText(dialogKey);          
+            ui.SetDialogText(dialogKey);
+            Destroy(gameObject);        
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        Destroy(gameObject);
-    }
+
 }

@@ -80,11 +80,20 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool hasInteracted;
 
 
-
+    //sounds
+    [Header("Sons")]
     [Header("Footsteps")]
     public AudioClip footstepSounds;
     public AudioSource footstepAudioSource;
     public float footstepInterval = 0.33f;
+
+    [Header("Ferramenta de Atribuição")]
+    
+    public AudioSource assignToolAudioSource;
+    public AudioClip copySFX;
+    public AudioClip storeSFX;
+
+
 
     //cutscene lock
     [HideInInspector] public bool isInCutscene;
@@ -319,6 +328,7 @@ public class PlayerController : MonoBehaviour
             target = obj
 
         });
+        assignToolAudioSource.PlayOneShot(storeSFX);
         UpdateUI();
     }
 

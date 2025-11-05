@@ -7,14 +7,17 @@ public class TitleScreen : MonoBehaviour
 {
     //components
     private ScoreManager sm;
-    public float fadeOutDuration = 3f;
+
 
     //score screen info
     [Header("Tela de pontuação")]
     [SerializeField] private GameObject scoreScreen;
     [SerializeField] private TextMeshProUGUI hiScorePlayer;
     [SerializeField] private TextMeshProUGUI hiScoreValue;
-    [SerializeField]private TMP_InputField playerName;
+    [SerializeField] private TMP_InputField playerName;
+
+    //intro screen
+    [SerializeField] private IntroHandler introScene;
 
     void Awake()
     {
@@ -23,6 +26,7 @@ public class TitleScreen : MonoBehaviour
     void Start()
     {
         scoreScreen.SetActive(false);
+        //introScene.SetActive(false);
     }
     public void ShowProfileScreen()
     {
@@ -31,7 +35,8 @@ public class TitleScreen : MonoBehaviour
         hiScoreValue.text = sm.PrintHighScore();
 
     }
-    public void FadeOut()
+
+    public void ShowIntro()
     {
         var name = playerName.text.Trim();
         if (string.IsNullOrEmpty(name))
@@ -39,13 +44,9 @@ public class TitleScreen : MonoBehaviour
             name = "Jogador";
         }
         sm.SetPlayerName(name);
-        StartCoroutine(TransitionToNextScene());
+        introScene.StartIntro();
+        
     }
 
 
-    private IEnumerator TransitionToNextScene()
-    {
-        yield return new WaitForSeconds(fadeOutDuration);
-        SceneManager.LoadScene("Scenes/SceneOne");
-    }
 }

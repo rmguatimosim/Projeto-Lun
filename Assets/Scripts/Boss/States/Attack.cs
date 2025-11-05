@@ -36,6 +36,9 @@ namespace Behaviors.MeleeCreature.States
             controller.thisAgent.isStopped = true;
             controller.thisAgent.updatePosition = false;
             controller.thisAgent.updateRotation = false;
+
+            //play sound
+            controller.audioSource.PlayOneShot(controller.detectPlayerSound);
            
 
         }

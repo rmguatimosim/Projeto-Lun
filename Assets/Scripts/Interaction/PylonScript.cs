@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Player;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class PylonScript : MonoBehaviour
     private Data data;
     [HideInInspector] public bool wasActivated;
     [HideInInspector] public bool canDamageBoss;
+    public List<MeshRenderer> meshs;
+    public GameObject dialogChangeForm;
 
     [Header("Display")]
     public TextMeshProUGUI statusText;
@@ -24,7 +27,6 @@ public class PylonScript : MonoBehaviour
 
     void Start()
     {
-        //gameObject.GetComponentInChildren<MeshRenderer>().material = varForm.material;
         ChangeColor();
         data.canReceive = !wasActivated;
         SetTexts();
@@ -42,6 +44,10 @@ public class PylonScript : MonoBehaviour
                 expectedData = 69;
                 SetTexts();
                 ChangeColor();
+                if(dialogChangeForm != null)
+                {
+                    dialogChangeForm.SetActive(true);   
+                }
                 return;
             }
             wasActivated = true;
@@ -82,7 +88,10 @@ public class PylonScript : MonoBehaviour
 
     private void ChangeColor()
     {
-        gameObject.GetComponentInChildren<MeshRenderer>().material = varForm.material;
+        foreach(MeshRenderer m in meshs)
+        {
+            m.material = varForm.material;
+        }
     }
 
     public void SetTextBroken()

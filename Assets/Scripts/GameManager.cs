@@ -36,10 +36,13 @@ public class GameManager : MonoBehaviour
     //music
     [Header("Music")]
     public AudioSource audioSource2D;
-    // public AudioSource bossMusic;
+    public AudioSource gameplayMusic;
+    public AudioSource bossMusic;
 
     //Dialog database
+    [Header("Diálogo")]
     public DialogDatabase dialogDatabase;
+    public AudioClip dialogSound;
 
 
     void Awake()
@@ -60,20 +63,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        // //play music
-        // var musicTargetVolume = gameplayMusic.volume;
-        // gameplayMusic.volume = 0;
-        // gameplayMusic.Play();
-        // StartCoroutine(FadeAudioSource.StartFade(gameplayMusic, musicTargetVolume, 1f));
+        //play music
+        var musicTargetVolume = gameplayMusic.volume;
+        gameplayMusic.volume = 0;
+        gameplayMusic.Play();
+        StartCoroutine(FadeAudioSource.StartFade(gameplayMusic, 1f, musicTargetVolume));
 
-        // //play ambience
-        // var ambienceTargetVolume = ambienceMusic.volume;
-        // ambienceMusic.volume = 0;
-        // ambienceMusic.Play();
-        // StartCoroutine(FadeAudioSource.StartFade(ambienceMusic, ambienceTargetVolume, 1f));
-
-        // //listen to OnGameOver
-        // GlobalEvents.Instance.OnGameOver += (sender, args) => isGameOver = true;
     }
 
     void Update()
@@ -141,8 +136,23 @@ public class GameManager : MonoBehaviour
         {
             gameplayUI.ShowNewRecord(false);
         }
-        
-        
+
+    }
+    
+    public void StartBossBattle()
+    {
+        //stop gameplay music
+        StartCoroutine(FadeAudioSource.StartFade(gameplayMusic, 2f, 0));
+
+        //play boss music
+        var bossMusicVolume = bossMusic.volume;
+        bossMusic.volume = 0;
+        bossMusic.Play();
+        StartCoroutine(FadeAudioSource.StartFade(
+            bossMusic,
+            0.5f,
+            bossMusicVolume
+        ));
     }
 
 

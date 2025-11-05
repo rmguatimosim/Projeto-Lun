@@ -1,10 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossRoomTrigger : MonoBehaviour
 {
 
-    public BoxCollider doorTrigger;
+    public DoorScript doorTrigger;
     private GameManager gm;
+    public GameObject boss;
+    public GameObject dialogTriggers;
+    public float displayDialogsCooldown;
 
     void Awake()
     {
@@ -15,18 +19,23 @@ public class BossRoomTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            doorTrigger.enabled = false;
-            var player = gm.player;
-            var rb = player.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezePositionY |
-                            RigidbodyConstraints.FreezeRotationX |
-                            RigidbodyConstraints.FreezeRotationY |
-                            RigidbodyConstraints.FreezeRotationZ;
+            doorTrigger.DisableDoor();
+            boss.SetActive(true);
+            gm.StartBossBattle();
+            StartCoroutine(ActivateDialogTriggers());
+
         }
+
     }
 
     void OnTriggerExit(Collider other)
     {
         Destroy(gameObject);
+    }
+
+    private IEnumerator ActivateDialogTriggers()
+    {
+        yield return new WaitForSeconds(displayDialogsCooldown);
+        dialogTriggers.SetActive(true);
     }
 }

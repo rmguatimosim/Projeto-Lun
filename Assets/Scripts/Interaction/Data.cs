@@ -21,7 +21,8 @@ public class Data : MonoBehaviour
 
     //dialog
     [Header("Diálogo")]
-    public DialogEntry damageDialog;
+    public DialogEntry copyDamage;
+    public DialogEntry storeDamage;
 
     public event EventHandler<SaveContentArgs> OnStoring;
 
@@ -73,6 +74,7 @@ public class Data : MonoBehaviour
             content = pc.content,
             type = pc.currentVarForm.varType
         });
+        pc.assignToolAudioSource.PlayOneShot(pc.storeSFX);
     }
 
     private void OnCopy(object sender, SaveContentArgs args)
@@ -87,9 +89,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Impossível receber valor de variável de tipo diferente");
-                //pc.thisHealth.Damage(1);
-                DealDamageWithDialog(1);
+                CopyDamageWithDialog(1);
 
 
             }
@@ -103,8 +103,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                Debug.Log("Impossível receber valor de variável de tipo diferente");
-                pc.thisHealth.Damage(1);
+                CopyDamageWithDialog(1);
             }
         }
         else
@@ -127,10 +126,7 @@ public class Data : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Tipo inválido");
-                pc.thisHealth.Damage(1);
-
-
+                StoreDamageWithDialog(1);
             }
         }
         if (gameObject.GetComponent<Switch>() != null)
@@ -144,7 +140,8 @@ public class Data : MonoBehaviour
             else
             {
                 //Debug.Log("Tipo inválido para abrir a porta");
-                pc.thisHealth.Damage(1);
+                //pc.thisHealth.Damage(1);
+                StoreDamageWithDialog(1);
 
             }
         }
@@ -158,8 +155,9 @@ public class Data : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Tipo inválido");
-                pc.thisHealth.Damage(1);
+                // //Debug.Log("Tipo inválido");
+                // pc.thisHealth.Damage(1);
+                StoreDamageWithDialog(1);
 
             }
         }
@@ -173,21 +171,31 @@ public class Data : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Tipo inválido");
-                pc.thisHealth.Damage(1);
+                // //Debug.Log("Tipo inválido");
+                // pc.thisHealth.Damage(1);
+                StoreDamageWithDialog(1);
 
             }
         }
 
         pc.UpdateUI();
     }
-    
-    private void DealDamageWithDialog(int amount)
+
+    private void CopyDamageWithDialog(int amount)
     {
         pc.thisHealth.Damage(amount);
-        if (damageDialog != null)
+        if (copyDamage != null)
         {
-            ui.SetDialogText(damageDialog);
+            ui.SetDialogText(copyDamage);
+        }
+    }
+    
+    private void StoreDamageWithDialog(int amount)
+    {
+        pc.thisHealth.Damage(amount);
+        if (storeDamage != null)
+        {
+            ui.SetDialogText(storeDamage);
         }
     }
     

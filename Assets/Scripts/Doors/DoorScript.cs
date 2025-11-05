@@ -12,8 +12,8 @@ public class DoorScript : MonoBehaviour
     private bool isClosed = true;
     public VarForm varForm;
     private bool isSolved;
-    private bool colorIsNormal;
-    private Material activeDoorMaterial;
+    // private bool colorIsNormal;
+    // private Material activeDoorMaterial;
 
 
     //panel control
@@ -29,11 +29,17 @@ public class DoorScript : MonoBehaviour
     [Header("Mensagem de erro")]
     public DialogEntry dialog;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip doorOpenSound;
+    public AudioClip doorClosedSound;
+
+
 
     void Awake()
     {
         doorRenderers = door.GetComponentsInChildren<MeshRenderer>();
-        activeDoorMaterial = doorRenderers[0].material;
+        //activeDoorMaterial = doorRenderers[0].material;
         data = GetComponent<Data>();
         thisAnimator = GetComponent<Animator>();
     }
@@ -84,6 +90,7 @@ public class DoorScript : MonoBehaviour
         {
             thisAnimator.SetBool("bDoorOpen", true);
             isClosed = false;
+            audioSource.PlayOneShot(doorOpenSound);
             return;
         }
         if (other.CompareTag("Player"))
@@ -104,7 +111,7 @@ public class DoorScript : MonoBehaviour
             }
         }
     }
-    
+
     //trigger to close the door
     void OnTriggerExit(Collider other)
     {
@@ -112,6 +119,14 @@ public class DoorScript : MonoBehaviour
         {
             isClosed = true;
             thisAnimator.SetBool("bDoorOpen", false);
+            audioSource.PlayOneShot(doorClosedSound);
         }
+    }
+    
+    public void DisableDoor()
+    {
+        isClosed = true;
+        thisAnimator.SetBool("bDoorOpen", false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 }

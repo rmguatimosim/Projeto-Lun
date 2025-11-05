@@ -102,6 +102,8 @@ MonoBehaviour:
   interaction: {fileID: 7135670676276429194}
   content: 60
   canReceive: 0
+  copyDamage: {fileID: 11400000, guid: a44b2e65b029b7244a9d650ac1bba895, type: 2}
+  storeDamage: {fileID: 11400000, guid: 96774697ea3015949a9b82304dc362a6, type: 2}
 --- !u!1001 &4354919972324533775
 PrefabInstance:
   m_ObjectHideFlags: 0

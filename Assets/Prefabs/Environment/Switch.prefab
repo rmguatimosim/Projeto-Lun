@@ -105,6 +105,8 @@ MonoBehaviour:
   interaction: {fileID: 4057938391021404747}
   content: 0
   canReceive: 0
+  copyDamage: {fileID: 11400000, guid: a44b2e65b029b7244a9d650ac1bba895, type: 2}
+  storeDamage: {fileID: 11400000, guid: 96774697ea3015949a9b82304dc362a6, type: 2}
 --- !u!95 &971023419622627376
 Animator:
   serializedVersion: 7

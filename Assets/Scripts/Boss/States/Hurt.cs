@@ -27,6 +27,9 @@ namespace Behaviors.MeleeCreature.States
             //update animator
             controller.thisAnimator.SetTrigger("tImpact");
 
+            //play sound
+            controller.audioSource.PlayOneShot(controller.hitWallSound, 1.5f);
+
         }
 
         public override void Exit()

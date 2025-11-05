@@ -60,7 +60,7 @@ namespace Player.States
             {
                 footstepCooldown = controller.footstepInterval;
                 var audioClip = controller.footstepSounds;
-                var volumeScale = Random.Range(0.6f, 0.8f);
+                var volumeScale = Random.Range(0.3f, 0.6f);
                 controller.footstepAudioSource.PlayOneShot(audioClip, volumeScale);
             }
 

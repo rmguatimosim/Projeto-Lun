@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HoleInTheWallDialog
   m_EditorClassIdentifier: 
   key: holeInTheWall
-  message: "Bits e Bytes... Que que aconteceu aqui? Esse buraco para levar pra...
+  message: "Bits e Bytes... Que que aconteceu aqui? Esse buraco parece levar pra...
     fora do sistema? \xC9 perigoso, mas talvez me ajude a chegar no dep\xF3sito."

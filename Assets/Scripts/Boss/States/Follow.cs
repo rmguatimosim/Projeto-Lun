@@ -1,17 +1,18 @@
 
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Behaviors.MeleeCreature.States
 {
     public class Follow : State
     {
-        private MeleeCreatureController controller;
-        private MeleeCreatureHelper helper;
+        private readonly MeleeCreatureController controller;
+        private readonly MeleeCreatureHelper helper;
 
         private readonly float updateInterval = 1;
         private float updateCooldown;
-        // private float ceaseFollowCooldown;
+
+        private float footstepInterval = 0.5f;
+        private float footstepCooldown;
 
         public Follow(MeleeCreatureController controller) : base("Follow")
         {
@@ -38,7 +39,6 @@ namespace Behaviors.MeleeCreature.States
         {
             base.Update();
 
-
             //update destination
             if ((updateCooldown -= Time.deltaTime) <= 0)
             {
@@ -48,14 +48,16 @@ namespace Behaviors.MeleeCreature.States
                 controller.thisAgent.SetDestination(playerPosition);
             }
 
-            // //Cease follow
-            // if ((ceaseFollowCooldown -= Time.deltaTime) <= 0f)
-            // {
-            //     if (!helper.IsPlayerOnSight())
-            //     {
-            //         controller.stateMachine.ChangeState(controller.idleState);
-            //     }
-            // }
+                // Footstep sound logic
+            if (controller.thisAgent.velocity.magnitude > 0.1f)
+            {
+                if ((footstepCooldown -= Time.deltaTime) <= 0)
+                {
+                    footstepCooldown = footstepInterval;
+                    controller.audioSource.PlayOneShot(controller.footStepSound);
+                }
+            }
+
 
             //Attempt to attack
             if (helper.GetDistanceToPlayer() <= controller.distanceToAttack)

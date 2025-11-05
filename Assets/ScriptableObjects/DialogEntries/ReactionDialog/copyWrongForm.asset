@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff0616809f505cb4fbff12068bf0cb23, type: 3}
-  m_Name: copyWrongForm
+  m_Name: CopyWrongForm
   m_EditorClassIdentifier: 
   key: copyWrongForm
   message: "BZZBzzB - Ai! LUN! N\xE3o esquece que voc\xEA n\xE3o pode copiar valor

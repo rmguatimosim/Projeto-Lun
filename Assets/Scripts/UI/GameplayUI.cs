@@ -8,11 +8,18 @@ using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {
-    [SerializeField] private Canvas thisCanvas;
 
     [Header("Objects")]
     private PlayerController pc;
     private GameManager gm;
+
+    //initial animation
+    [Header("Animações de UI")]
+    public float wakeUpTime = 3f;
+    [SerializeField] private Canvas thisCanvas;
+    public Animator thisAnimator;
+    public GameObject initialTutorialTrigger;
+
 
     //display form and content
     [Header("Forma e conteúdo")]
@@ -87,7 +94,11 @@ public class GameplayUI : MonoBehaviour
     {
         tutorialIndex = 0;
         gameOverScreen.SetActive(false);
-        playerName.text = sm.GetPlayerName();
+        if(sm != null)
+        {
+            playerName.text = sm.GetPlayerName();
+        }
+        StartCoroutine(EnableCanvas());
 
 
     }
@@ -229,6 +240,11 @@ public class GameplayUI : MonoBehaviour
         for (int i = 0; i<=contentLength; i++ )
         {
             dialogContent.maxVisibleCharacters = i;
+            if (gm.dialogSound != null && gm.audioSource2D != null)
+            {
+                gm.audioSource2D.PlayOneShot(gm.dialogSound, 0.5f);
+            }
+
             yield return new WaitForSeconds(typingSpeed);
         }
         if (closeCoroutine != null)
@@ -276,7 +292,13 @@ public class GameplayUI : MonoBehaviour
         newRecord.SetActive(b);
     }
 
-
+    // fade in at the start
+    private IEnumerator EnableCanvas()
+    {
+        thisAnimator.enabled = true;
+        yield return new WaitForSeconds(wakeUpTime);
+        initialTutorialTrigger.SetActive(true);
+    }
 
 
 

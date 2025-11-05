@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AssignToolHolder : MonoBehaviour
 {
     private PlayerController pc;
     public GameObject assignTool;
+
     
     
     //triggers that this interaction enable
@@ -11,6 +13,7 @@ public class AssignToolHolder : MonoBehaviour
     public GameObject charDoorTutorialTrigger;
     public GameObject objectiveTrigger;
     public GameObject dialogTrigger;
+    public GameObject dataValorDialogTrigger;
 
     //triggers char door dialog
     public GameObject charDoorHasTool;
@@ -35,8 +38,9 @@ public class AssignToolHolder : MonoBehaviour
             charDoorHasTool.SetActive(true);
             if (charDoorNoTool != null)
             {
-                Destroy(charDoorNoTool);                
+                Destroy(charDoorNoTool);
             }
+            dataValorDialogTrigger.SetActive(true);
         }
     }
 }
