@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     //Singleton
     public static GameManager Instance { get; private set; }
 
+    //game states
     [HideInInspector] public bool isGameOver;
+    [HideInInspector] public bool isGameWon;
 
     //Interaction
     public List<Interaction> interactionList;
@@ -96,9 +98,9 @@ public class GameManager : MonoBehaviour
 
     public void FellOffTheMap()
     {
-        if (player.transform.position.y < -30)
+        if (player.transform.position.y < -20)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            player.transform.position = new Vector3(70,-12,66);
         }
     }
 

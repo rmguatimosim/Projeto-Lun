@@ -36,14 +36,14 @@ public class MeleeCreatureHelper
             return false;
         }
         //ERROR: found obstacle
-        var layerMask = LayerMask.GetMask("Default", "Player");
-        if (Physics.Raycast(origin, direction, out var hitInfo, searchRadius, layerMask))
-        {
-            if (hitInfo.transform.gameObject != player)
-            {
-                return false;
-            }
-        }
+        // var layerMask = LayerMask.GetMask("Default", "Player");
+        // if (Physics.Raycast(origin, direction, out var hitInfo, searchRadius, layerMask))
+        // {
+        //     if (hitInfo.transform.gameObject != player)
+        //     {
+        //         return false;
+        //     }
+        // }
         //All good
         return true;
     }

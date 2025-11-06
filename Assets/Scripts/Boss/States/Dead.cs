@@ -21,6 +21,7 @@ namespace Behaviors.MeleeCreature.States
 
             //update animator
             controller.thisAnimator.SetTrigger("tDead");
+            GameManager.Instance.Endgame();
 
         }
 

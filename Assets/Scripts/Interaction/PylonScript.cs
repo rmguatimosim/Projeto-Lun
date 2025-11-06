@@ -19,6 +19,10 @@ public class PylonScript : MonoBehaviour
     public TextMeshProUGUI statusText;
     public TextMeshProUGUI energyText;
 
+    [Header("FX")]
+    public GameObject electricityFX;
+    public GameObject sphere;
+
 
     void Awake()
     {
@@ -98,5 +102,12 @@ public class PylonScript : MonoBehaviour
     {
         statusText.text = "######";
         energyText.text = "###";
+    }
+
+    public void StartElectricity()
+    {
+        var fxPosition = sphere.transform.position;
+        var fxRotation = electricityFX.transform.rotation;
+        Instantiate(electricityFX, fxPosition, fxRotation);
     }
 }
