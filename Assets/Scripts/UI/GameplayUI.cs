@@ -76,6 +76,7 @@ public class GameplayUI : MonoBehaviour
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TextMeshProUGUI endGameScoreText;
+    [SerializeField] private TextMeshProUGUI endGamePlayerName;
 
 
     void Awake()
@@ -286,6 +287,10 @@ public class GameplayUI : MonoBehaviour
     public void SetEndGameScore()
     {
         endGameScoreText.text = gm.PrintScore();
+    }
+    public void SetEndGamePlayerName()
+    {
+        endGamePlayerName.text = sm.GetPlayerName();
     }
     public void ShowNewRecord(bool b)
     {

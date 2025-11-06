@@ -644,7 +644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6796217165740522252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1935,6 +1935,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wakeUpTime: 3
   thisCanvas: {fileID: 7987414992321069417}
+  thisAnimator: {fileID: 0}
+  initialTutorialTrigger: {fileID: 0}
   typeText: {fileID: 2978394345716060500}
   currentType: {fileID: 7691085158516936811}
   value: {fileID: 3231806777778792255}
@@ -1971,6 +1973,7 @@ MonoBehaviour:
   dialogContent: {fileID: 3713476028435327790}
   gameOverScreen: {fileID: 5099215597685278113}
   endGameScoreText: {fileID: 3152905838399320888}
+  endGamePlayerName: {fileID: 1529064497203061920}
 --- !u!95 &2966780711710374574
 Animator:
   serializedVersion: 7
@@ -3568,7 +3571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4879112357822086236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4159,10 +4162,10 @@ RectTransform:
   - {fileID: 670038725835381092}
   - {fileID: 542326798906270137}
   - {fileID: 6851907668247767817}
-  - {fileID: 8010294637761536427}
-  - {fileID: 4879112357822086236}
   - {fileID: 1707694489489403293}
+  - {fileID: 8010294637761536427}
   - {fileID: 6796217165740522252}
+  - {fileID: 4879112357822086236}
   m_Father: {fileID: 7459055547795886456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

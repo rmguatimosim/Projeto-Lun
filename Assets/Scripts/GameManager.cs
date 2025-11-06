@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameplayUI.SetEndGameScore();
         gameplayUI.ShowGameOverScreen();
+        gameplayUI.SetEndGamePlayerName();
         if (sm.IsNewRecord(finalScore))
         {
             gameplayUI.ShowNewRecord(true);

@@ -3,9 +3,10 @@ using UnityEngine;
 public class ElevatorEnterTrigger : MonoBehaviour
 {
     public GameObject elevator;
+    public Switch elevatorButton;
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && elevatorButton.wasActivated)
         {
             var status = other.GetComponent<PlayerController>().isInCutscene;
             other.GetComponent<PlayerController>().isInCutscene = !status;
