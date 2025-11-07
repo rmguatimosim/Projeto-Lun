@@ -33,15 +33,17 @@ public class BossRoomTrigger : MonoBehaviour
             boss.SetActive(true);
             gm.StartBossBattle();
             StartCoroutine(ActivateDialogTriggers());
-
-
+            StartCoroutine(EndIntroScene());
         }
 
     }
 
     void OnTriggerExit(Collider other)
     {
-        bossIntro.enabled = false;
+        if (bossIntro.enabled)
+        {
+            bossIntro.enabled = false;
+        }
         Destroy(gameObject);
 
     }
@@ -50,6 +52,12 @@ public class BossRoomTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(displayDialogsCooldown);
         dialogTriggers.SetActive(true);
+    }
+
+    private IEnumerator EndIntroScene()
+    {
+        yield return new WaitForSeconds(bossIntroTimer);
+        bossIntro.enabled = false;
     }
 
 
