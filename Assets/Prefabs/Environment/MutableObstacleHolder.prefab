@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e85c171b01b1f4594ddff55932f66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 6
+  radius: 4
 --- !u!114 &3569125552007101877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +87,7 @@ MonoBehaviour:
   expectedVarForm: {fileID: 11400000, guid: 355e916225c167f45b12241dbdf5d390, type: 2}
   heightText: {fileID: 6879659710608145932}
   wasActivated: 0
+  body: {fileID: 6389725090799701386}
 --- !u!114 &6687355747422267789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7164225296720015495, guid: 93b774eb7e3bfde438bbfdfab47f0bfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7164225296720015495, guid: 93b774eb7e3bfde438bbfdfab47f0bfa, type: 3}
       propertyPath: m_LocalPosition.z

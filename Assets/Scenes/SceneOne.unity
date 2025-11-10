@@ -13935,8 +13935,8 @@ Transform:
   m_GameObject: {fileID: 282387850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 61.027077, y: 7.72738, z: 16.31247}
-  m_LocalScale: {x: 43.805996, y: 22.755, z: 1}
+  m_LocalPosition: {x: 61.027077, y: 7.72738, z: 13.93}
+  m_LocalScale: {x: 46, y: 22.755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 617264056}
@@ -22961,7 +22961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22998,6 +22998,14 @@ PrefabInstance:
     - target: {fileID: 6389725090799701386, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_Name
       value: MutableObstacleHolder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846518543047284360, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135670676276429194, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: radius
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1871900730672445877, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
@@ -23107,8 +23115,8 @@ Transform:
   m_GameObject: {fileID: 491698918}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 18.427078, y: 7.72738, z: 15.512474}
-  m_LocalScale: {x: 43.805996, y: 22.755, z: 1}
+  m_LocalPosition: {x: 18.427078, y: 7.72738, z: 13.95}
+  m_LocalScale: {x: 45, y: 22.755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 617264056}
@@ -70942,17 +70950,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2073738108}
     m_Modifications:
-    - target: {fileID: 219352402636935553, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
-      propertyPath: m_Name
-      value: MutableObstacle
-      objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.992622
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -70990,8 +70994,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: MutableObstacleHolder (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1871900730672445877, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+    - target: {fileID: 6846518543047284360, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135670676276429194, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: radius
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -82188,7 +82199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82225,6 +82236,14 @@ PrefabInstance:
     - target: {fileID: 6389725090799701386, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_Name
       value: MutableObstacleHolder (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846518543047284360, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135670676276429194, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: radius
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1871900730672445877, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
@@ -103917,7 +103936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2108777063877830964, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -103954,6 +103973,14 @@ PrefabInstance:
     - target: {fileID: 6389725090799701386, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
       propertyPath: m_Name
       value: MutableObstacleHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846518543047284360, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135670676276429194, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}
+      propertyPath: radius
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1871900730672445877, guid: 45ff1742af7427d4ea8f9917e7b880f0, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections;
 using Player;
 using TMPro;
 using UnityEngine;
@@ -5,37 +6,68 @@ using UnityEngine;
 public class ObstacleScript : MonoBehaviour
 {
 
+    //data
     public int expectedData;
     private Data data;
-    private Animator thisAnimator;
     public VarForm expectedVarForm;
-    public TextMeshProUGUI heightText;
     [HideInInspector] public bool wasActivated = false;
+    
+    //display
+    public TextMeshProUGUI heightText;
+    public GameObject body;
+    public float elapsed = 0.5f;
+    private bool isMoving = false;
 
     void Awake()
     {
-        data = gameObject.GetComponent<Data>();
-        thisAnimator = gameObject.GetComponent<Animator>();
-    }
+        data = gameObject.GetComponent<Data>();    }
 
     void Start()
     {
         data.canReceive = !wasActivated;
-        heightText.text = "ALTURA\n 6px";
+        heightText.text = "ALTURA\n"+(data.content/10)+"px";
     }
 
-    void Update()
+    
+    public void ChangeHeight()
     {
-        if (!wasActivated && data.content == expectedData)
+        
+        heightText.text = "ALTURA\n" + (data.content / 10f) + "px";
+        float y = data.content / 10f;
+        Vector3 newPosition = new(gameObject.transform.position.x, y - 4f, gameObject.transform.position.z);
+        if (!isMoving)
         {
-            heightText.text = "ALTURA\n"+expectedData+"px";
-            thisAnimator.SetTrigger("tActivate");
+            StartCoroutine(MoveToPosition(newPosition, elapsed));
+        }
+
+        if(!wasActivated && data.content == expectedData)
+        {
             data.canReceive = false;
+            wasActivated = true;
+            StartCoroutine(DeleteObstacle());
         }
     }
 
-    public void DeleteObstacle()
+    public IEnumerator DeleteObstacle()
     {
+        yield return new WaitForSeconds(3);
         Destroy(this);
+    }
+
+    //coroutine to move the obstacle
+    public IEnumerator MoveToPosition(Vector3 targetPosition, float duration)
+    {
+        isMoving = true;
+        Vector3 startPosition = body.transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            body.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        body.transform.position = targetPosition;
+        isMoving = false;
     }
 }

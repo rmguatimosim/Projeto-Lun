@@ -148,16 +148,20 @@ public class Data : MonoBehaviour
         if (gameObject.GetComponent<ObstacleScript>() != null)
         {
             var obstacle = gameObject.GetComponent<ObstacleScript>();
-            if (obstacle.expectedVarForm.varType == args.type && args.content == obstacle.expectedData)
+            if (obstacle.expectedVarForm.varType == args.type /*&& args.content == obstacle.expectedData*/)
             {
                 content = args.content;
-                gm.IncreaseScore();
+                obstacle.ChangeHeight();
+                if(content == obstacle.expectedData)
+                {
+                    gm.IncreaseScore(); 
+                }
             }
             else
             {
                 // //Debug.Log("Tipo inválido");
                 // pc.thisHealth.Damage(1);
-                StoreDamageWithDialog(1);
+                //StoreDamageWithDialog(1);
 
             }
         }
